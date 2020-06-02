@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "html://www.w3.org/TR/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body> 
+        <h:form>
+            Player Transfer Team <br/>
+            İsim-Soyisim :<h:inputText value="#{oyuncuBean.entity.isim}"/> <br/>
+            Uyruk :<h:inputText value="#{oyuncuBean.entity.uyruk}"/> <br/>
+            Takım :<h:inputText value="#{oyuncuBean.entity.fktakim}"/> <br/>
+            <h:commandButton action="#{oyuncuBean.create()}" value="Create"/><br/>
+        </h:form>
+    </body>
+</html>

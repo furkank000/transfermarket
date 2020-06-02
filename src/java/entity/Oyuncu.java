@@ -20,6 +20,20 @@ public class Oyuncu {
     public Oyuncu() {
     }
 
+    public Oyuncu(int id, int fktakim, String isim, Date dogumTarihi, String boy, String mevki, String ayak, int piyasaDegeri, int numara, String uyruk) {
+        this.id = id;
+        this.fktakim = fktakim;
+        this.isim = isim;
+        this.dogumTarihi = dogumTarihi;
+        this.boy = boy;
+        this.mevki = mevki;
+        this.ayak = ayak;
+        this.piyasaDegeri = piyasaDegeri;
+        this.numara = numara;
+        this.uyruk = uyruk;
+    }
+    
+    
     public int getId() {
         return id;
     }

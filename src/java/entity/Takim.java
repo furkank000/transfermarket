@@ -17,6 +17,18 @@ public class Takim {
 
     public Takim() {
     }
+
+    public Takim(int id, int fklig, int puan, int sira, int avarage, String isim, String teknikDirektur, String golDegerleri) {
+        this.id = id;
+        this.fklig = fklig;
+        this.puan = puan;
+        this.sira = sira;
+        this.avarage = avarage;
+        this.isim = isim;
+        this.teknikDirektur = teknikDirektur;
+        this.golDegerleri = golDegerleri;
+    }
+    
     
     
     public int getId() {
