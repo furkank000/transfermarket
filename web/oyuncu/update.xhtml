@@ -5,16 +5,22 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "html://www.w3.org/TR/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templete/admin.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
         <h:form>
-            Player Transfer Team :<h:inputText value="#{oyuncuBean.entity.fktakim}"/> <br/>
-            <h:commandButton action="#{oyuncuBean.update()}" value="Update"/>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Player Transfer Team</label>
+                <label for="exampleInputPassword1">Takım</label>
+                <h:selectOneMenu class="custom-select" value="#{oyuncuBean.entity.takim}" converter="TakimConverter">
+                    <f:selectItems value="#{takimBean.read}" var="l" itemLabel="#{l.isim}" itemValue="#{l}"/>
+                </h:selectOneMenu>
+                <h:commandButton styleClass="btn btn-primary" action="#{oyuncuBean.update()}" value="Update"/>
+            </div>
         </h:form>
-    </body>
-</html>
+    </ui:define>
+</ui:composition>

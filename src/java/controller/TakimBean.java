@@ -17,10 +17,13 @@ import javax.inject.Named;
 public class TakimBean implements Serializable {
     private TakimDao dao;
     private Takim entity;
-
+    
+    
+    
     public TakimBean() {
     }
 
+    
     
     public TakimDao getDao() {
         if(this.dao == null)

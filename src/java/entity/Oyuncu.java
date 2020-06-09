@@ -7,7 +7,7 @@ import java.sql.Date;
  */
 public class Oyuncu {
     private int id;
-    private int fktakim;
+    private Takim takim;
     private String isim;
     private Date dogumTarihi;
     private String boy;
@@ -20,9 +20,9 @@ public class Oyuncu {
     public Oyuncu() {
     }
 
-    public Oyuncu(int id, int fktakim, String isim, Date dogumTarihi, String boy, String mevki, String ayak, int piyasaDegeri, int numara, String uyruk) {
+    public Oyuncu(int id, Takim takim, String isim, Date dogumTarihi, String boy, String mevki, String ayak, int piyasaDegeri, int numara, String uyruk) {
         this.id = id;
-        this.fktakim = fktakim;
+        this.takim = takim;
         this.isim = isim;
         this.dogumTarihi = dogumTarihi;
         this.boy = boy;
@@ -42,13 +42,14 @@ public class Oyuncu {
         this.id = id;
     }
 
-    public int getFktakim() {
-        return fktakim;
+    public Takim getTakim() {
+        return takim;
     }
 
-    public void setFktakim(int fktakim) {
-        this.fktakim = fktakim;
+    public void setTakim(Takim takim) {
+        this.takim = takim;
     }
+
 
     public String getIsim() {
         return isim;

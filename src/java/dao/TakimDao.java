@@ -12,6 +12,9 @@ import util.DBConnect;
  */
 public class TakimDao extends DBConnect {
 
+    public TakimDao() {
+    }
+
     public List<Takim> read() {
         List<Takim> list = new ArrayList<>();
         try {
@@ -21,6 +24,8 @@ public class TakimDao extends DBConnect {
                 Takim tmp = new Takim(rs.getInt("id"), rs.getInt("fklig"), rs.getInt("puan"), rs.getInt("sira"), rs.getInt("avarage"), rs.getString("isim"), rs.getString("teknik_direktur"), rs.getString("gol_degerleri"));
                 list.add(tmp);
             }
+            st.close();
+            rs.close();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -53,6 +58,20 @@ public class TakimDao extends DBConnect {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+        public Takim getById(int id) {
+        Takim t = null;
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from takim where id = " + id);
+            rs.next();
+            t = new Takim(rs.getInt("id"), rs.getInt("fklig"), rs.getInt("puan"), rs.getInt("sira"), rs.getInt("avarage"), rs.getString("isim"), rs.getString("teknik_direktur"), rs.getString("gol_degerleri"));
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return t;
     }
 
 }
