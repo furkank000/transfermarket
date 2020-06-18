@@ -7,22 +7,29 @@ import java.sql.SQLException;
 /**
  * @author mehmet
  */
-public abstract class DBConnect {
-
-    private Connection connection;
-
-    public Connection connect() throws SQLException  {
-
-        if (this.connection == null || this.connection.isClosed()) {
+public class DBConnect {
+private static String url = "jdbc:mysql://localhost:3306/transfermarket";    
+    private static String driverName = "com.mysql.jdbc.Driver";   
+    private static String username = "root";   
+    private static String password = "bja";
+    private static Connection c;
+    public static Connection getConnection() {
+        try {
+            Class.forName(driverName);
             try {
-                Class.forName("org.mariadb.jdbc.Driver").newInstance();
-                this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/transfermarket?user=root&password=123");
-                System.out.println("Connect Succesfull Database");
-
-            } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                System.out.println(e.getMessage());
+                c = DriverManager.getConnection(url, username, password);
+            } catch (SQLException ex) {
+                System.out.println("Connection could not be established."); 
             }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver not found.");
         }
-        return this.connection;
+        return c;
     }
+    public static void closeConnection(Connection c) {
+		try {
+			c.close();
+		} catch (Exception ex) {
+		}
+	}
 }

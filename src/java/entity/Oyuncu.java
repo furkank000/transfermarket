@@ -1,15 +1,13 @@
 package entity;
 
-import java.sql.Date;
 
 /**
  * @author mehmet
  */
 public class Oyuncu {
-    private int id;
+    private Long id;
     private Takim takim;
     private String isim;
-    private Date dogumTarihi;
     private String boy;
     private String mevki;
     private String ayak;
@@ -20,11 +18,10 @@ public class Oyuncu {
     public Oyuncu() {
     }
 
-    public Oyuncu(int id, Takim takim, String isim, Date dogumTarihi, String boy, String mevki, String ayak, int piyasaDegeri, int numara, String uyruk) {
+    public Oyuncu(Long id, Takim takim, String isim,  String boy, String mevki, String ayak, int piyasaDegeri, int numara, String uyruk) {
         this.id = id;
         this.takim = takim;
         this.isim = isim;
-        this.dogumTarihi = dogumTarihi;
         this.boy = boy;
         this.mevki = mevki;
         this.ayak = ayak;
@@ -34,11 +31,11 @@ public class Oyuncu {
     }
     
     
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -59,13 +56,6 @@ public class Oyuncu {
         this.isim = isim;
     }
 
-    public Date getDogumTarihi() {
-        return dogumTarihi;
-    }
-
-    public void setDogumTarihi(Date dogumTarihi) {
-        this.dogumTarihi = dogumTarihi;
-    }
 
     public String getBoy() {
         return boy;

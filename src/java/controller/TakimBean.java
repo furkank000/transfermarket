@@ -2,10 +2,12 @@
 package controller;
 
 import dao.TakimDao;
+import entity.Lig;
 import entity.Takim;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -15,56 +17,71 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class TakimBean implements Serializable {
-    private TakimDao dao;
-    private Takim entity;
-    
+    private TakimDao takimdao;
+    private Takim takim;
+    @Inject
+    private LigBean liglerbean;
     
     
     public TakimBean() {
     }
 
-    
-    
-    public TakimDao getDao() {
-        if(this.dao == null)
-            this.dao = new TakimDao();
-        return dao;
+    public void create(){
+        this.getTakimdao().create(takim);
+        this.formtemizle();
     }
-
-    public void setDao(TakimDao dao) {
-        this.dao = dao;
-    }
-
-    public Takim getEntity() {
-        if(this.entity == null)
-            this.entity = new Takim();
-        return entity;
-    }
-
-    public void setEntity(Takim entity) {
-        this.entity = entity;
-    }
-    
-    public String create(){
-        this.getDao().create(entity);
-        return "/takim/list";
+    public List<Lig> getLigLists(){
+    return this.getLiglerbean().getRead();
     }
     
     public List<Takim> getRead(){
-        return this.getDao().read();
+        return this.getTakimdao().read();
+    }
+     public List<Takim> getRead2(){
+        return this.getTakimdao().read2();
     }
     
-    public String updateForm(Takim o){
-        this.entity = o;
-        return "/takim/update";
+    public void updateForm(Takim t){
+        this.takim = t;
     }
     
-    public String update(){
-        this.getDao().update(entity);
-        return "/takim/list";
+    public void update(){
+        this.getTakimdao().update(takim);
+        this.formtemizle();
     }
     
     public void delete(Takim o){
-        this.getDao().delete(o);
+        this.getTakimdao().delete(o);
     }
+
+    public void formtemizle() {
+        this.takim=new Takim();
+    }
+    public TakimDao getTakimdao() {
+        if(this.takimdao==null)
+            this.takimdao=new TakimDao();
+        return takimdao;
+    }
+
+    public void setTakimdao(TakimDao takimdao) {
+        this.takimdao = takimdao;
+    }
+
+    public Takim getTakim() {
+        if(this.takim==null)
+            this.takim=new Takim();
+        return takim;
+    }
+
+    public void setTakim(Takim takim) {
+        this.takim = takim;
+    }
+
+    public LigBean getLiglerbean() {
+        if(this.liglerbean==null)
+            this.liglerbean=new LigBean();
+        return liglerbean;
+    }
+    
+    
 }

@@ -1,48 +1,39 @@
 
 package entity;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Objects;
 
 /**
  *
- * @author mehmet
+ * @author muhenestugtekin
  */
 public class Musabaka {
-    private int id;
-    private int fktakim1;
-    private int fktakim2;
+    private Long id=null;
     private String sonuc;
-    private Date tarih;
     private int hafta;
-    private Time saat;
+    private Takim takim1;
+    private Takim takim2;
+
+    public Musabaka(Long id,  String sonuc, int hafta,Takim takim1,Takim takim2) {
+        this.id = id;
+        this.sonuc = sonuc;
+        this.hafta = hafta;
+        this.takim1=takim1;
+        this.takim2=takim2;
+    }
 
     public Musabaka() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getFktakim1() {
-        return fktakim1;
-    }
-
-    public void setFktakim1(int fktakim1) {
-        this.fktakim1 = fktakim1;
-    }
-
-    public int getFktakim2() {
-        return fktakim2;
-    }
-
-    public void setFktakim2(int fktakim2) {
-        this.fktakim2 = fktakim2;
-    }
+  
 
     public String getSonuc() {
         return sonuc;
@@ -50,14 +41,6 @@ public class Musabaka {
 
     public void setSonuc(String sonuc) {
         this.sonuc = sonuc;
-    }
-
-    public Date getTarih() {
-        return tarih;
-    }
-
-    public void setTarih(Date tarih) {
-        this.tarih = tarih;
     }
 
     public int getHafta() {
@@ -68,13 +51,49 @@ public class Musabaka {
         this.hafta = hafta;
     }
 
-    public Time getSaat() {
-        return saat;
+
+    public Takim getTakim1() {
+        if(this.takim1==null)
+            this.takim1=new Takim();
+        return takim1;
     }
 
-    public void setSaat(Time saat) {
-        this.saat = saat;
+    public void setTakim1(Takim takim1) {
+        this.takim1 = takim1;
     }
-    
+         public Takim getTakim2() {
+        if(this.takim2==null)
+            this.takim2=new Takim();
+        return takim2;
+    }
+
+    public void setTakim2(Takim takim2) {
+        this.takim2 = takim2;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Musabaka other = (Musabaka) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
     
 }

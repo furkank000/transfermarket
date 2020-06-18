@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      template="/template/template.xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="content">
+        <div class="container"><div class="row">
+                <div class="col-md-6">
+                    <h:form id="musabakaform">
+            <div class="form-group">
+                <label>Musabaka Takim1:</label>
+                <h:selectOneMenu value="#{musabakaBean.musabaka.takim1}" converter="TakimConverter">
+                    <f:selectItems value="#{musabakaBean.takimRead}" var="t" itemLabel="#{t.isim}" itemValue="#{t}"/>
+                </h:selectOneMenu><br/>
+             <label>Musabaka Takim2:</label>
+             <h:selectOneMenu value="#{musabakaBean.musabaka.takim2}" converter="TakimConverter">
+                    <f:selectItems value="#{musabakaBean.takimRead}" var="t" itemLabel="#{t.isim}" itemValue="#{t}"/>
+                </h:selectOneMenu><br/>
+                
+             <label>Musabaka Sonuc:</label>
+                <h:inputText styleClass="form-control" value="#{musabakaBean.musabaka.sonuc}"/><br/>
+               <label>Musabaka Hafta:</label>
+                <h:inputText styleClass="form-control" value="#{musabakaBean.musabaka.hafta}"/><br/>
+            </div>
+                        <h:commandButton styleClass="btn btn-primary" action="#{musabakaBean.create()}" rendered="#{musabakaBean.musabaka.id==null}" value="Create"><f:ajax execute="musabakaform" render="musabakaform musabakalistesi"/></h:commandButton>
+            <h:commandButton styleClass="btn btn-primary" action="#{musabakaBean.update()}" rendered="#{musabakaBean.musabaka.id!=null}" value="Update"><f:ajax execute="musabakaform" render="musabakaform musabakalistesi"/></h:commandButton>
+            <h:commandButton styleClass="btn btn-primary" action="#{musabakaBean.formtemizle()}" rendered="#{musabakaBean.musabaka.id!=null}" value="Clear Form"><f:ajax execute="@this" render="musabakaform musabakalistesi"/></h:commandButton>
+        </h:form></div><div class="col-md-6">
+                        <h:form id="musabakalistesi">
+            <h:dataTable styleClass="table table-hover table-striped mt-3" value="#{musabakaBean.read}" var="l">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                        #{l.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">TAKIM1</f:facet>
+                        #{l.takim1.isim}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">TAKIM2</f:facet>
+                        #{l.takim2.isim}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">SONUC</f:facet>
+                        #{l.sonuc}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">HAFTA</f:facet>
+                        #{l.hafta}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">ADMINISTRATION</f:facet>
+                    <div class="btn-group" role="group">
+                        <h:commandButton styleClass="btn btn-warning" action="#{musabakaBean.updateForm(l)}" value="update"><f:ajax execute="@this" render="musabakaform musabakalistesi"/></h:commandButton>
+                        <h:commandButton styleClass="btn btn-danger" action="#{musabakaBean.delete(l)}" value="delete"><f:ajax execute="@this" render="musabakaform musabakalistesi"/></h:commandButton>
+                    </div>
+                </h:column>
+            </h:dataTable>
+        </h:form></div>
+       </div></div>
+    </ui:define>
+</ui:composition>

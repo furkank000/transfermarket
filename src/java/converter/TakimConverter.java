@@ -17,25 +17,19 @@ public class TakimConverter implements Converter{
 
     private TakimDao takimdao;
 
-    public TakimDao getTakimdao() {
-        if(this.takimdao == null)
-            this.takimdao = new TakimDao();
-        return takimdao;
-    }
-
-    public void setTakimdao(TakimDao takimdao) {
-        this.takimdao = takimdao;
-    }
-    
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        return this.getTakimdao().getById(Integer.valueOf(string));
+        return this.getTakimdao().getById(Long.valueOf(string));
     }
 
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
         Takim t = (Takim) o;
-        return String.valueOf(t.getId());
+        return t.getId().toString();
     }
-    
+     public TakimDao getTakimdao() {
+        if(this.takimdao == null)
+            this.takimdao = new TakimDao();
+        return takimdao;
+    }
 }

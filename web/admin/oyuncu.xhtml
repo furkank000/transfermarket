@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      template="/template/template.xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="content">
+        <div class="row">
+        <div class="col-md-6">
+            <h:form id="oyuncuform">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Player</label>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">İsim Soyisim </label>
+                <h:inputText styleClass="form-control" value="#{oyuncuBean.oyuncu.isim}"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Numara</label>
+                <h:inputText styleClass="form-control" value="#{oyuncuBean.oyuncu.numara}"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Boy</label>
+                <h:inputText styleClass="form-control" value="#{oyuncuBean.oyuncu.boy}"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Ayak</label>
+                <h:inputText styleClass="form-control" value="#{oyuncuBean.oyuncu.ayak}"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Mevki</label>
+                <h:inputText styleClass="form-control" value="#{oyuncuBean.oyuncu.mevki}"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Piyasa Değeri</label>
+                <h:inputText styleClass="form-control" value="#{oyuncuBean.oyuncu.piyasaDegeri}"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Uyruk</label>
+                <h:inputText styleClass="form-control" value="#{oyuncuBean.oyuncu.uyruk}"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Takım</label>
+                <h:selectOneMenu value="#{oyuncuBean.oyuncu.takim}" converter="TakimConverter">
+                    <f:selectItems value="#{takimBean.read2}" var="ta" itemLabel="#{ta.isim}" itemValue="#{ta}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+                <h:commandButton styleClass="btn btn-primary" rendered="#{oyuncuBean.oyuncu.id==null}" action="#{oyuncuBean.create()}" value="Create"><f:ajax execute="oyuncuform" render="oyuncuform oyunculistesi"/></h:commandButton>
+                <h:commandButton styleClass="btn btn-primary" rendered="#{oyuncuBean.oyuncu.id!=null}" action="#{oyuncuBean.update()}" value="Update"><f:ajax execute="oyuncuform" render="oyuncuform oyunculistesi"/></h:commandButton>
+                <h:commandButton styleClass="btn btn-primary" rendered="#{oyuncuBean.oyuncu.id!=null}" action="#{oyuncuBean.formtemizle()}" value="Clear Form"><f:ajax execute="@this" render="oyuncuform oyunculistesi"/></h:commandButton>
+            </div>
+            </h:form></div><div class="col-md-6"><h:form id="oyunculistesi">
+            <h:dataTable styleClass="table table-hover mt-3" value="#{oyuncuBean.read}" var="o">
+                <h:column>
+                    <f:facet name="header">İsim</f:facet>
+                        #{o.isim}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Takım</f:facet>
+                        #{o.takim.isim}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Numara</f:facet>
+                        #{o.numara}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Boy</f:facet>
+                        #{o.boy}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Ayak</f:facet>
+                        #{o.ayak}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Mevki</f:facet>
+                        #{o.mevki}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Piyasa Degeri</f:facet>
+                        #{o.piyasaDegeri}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Uyruk</f:facet>
+                        #{o.uyruk}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Administration</f:facet>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <h:commandButton styleClass="btn btn-warning"  action="#{oyuncuBean.updateForm(o)}" value="update"><f:ajax execute="@this" render="oyuncuform oyunculistesi"/></h:commandButton>
+                        <h:commandButton styleClass="btn btn-danger"  action="#{oyuncuBean.delete(o)}" value="delete"><f:ajax execute="@this" render="oyuncuform oyunculistesi"/></h:commandButton>
+                    </div>
+                </h:column>
+            </h:dataTable>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <h:commandButton styleClass="btn btn-primary"  action="#{oyuncuBean.previous()}" value="Previous"><f:ajax execute="oyunculistesi" render="oyunculistesi"/></h:commandButton>
+                <h:commandButton styleClass="btn btn-primary"  action="#{oyuncuBean.next()}" value="Next"><f:ajax execute="oyunculistesi" render="oyunculistesi"/></h:commandButton>
+            </div>
+            </h:form></div></div>
+    </ui:define>
+</ui:composition>

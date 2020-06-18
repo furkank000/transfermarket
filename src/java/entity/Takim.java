@@ -1,51 +1,43 @@
 
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 /**
  *
  * @author mehmet
  */
 public class Takim {
-    private int id;
-    private int fklig;
+    private Long id;
     private int puan;
     private int sira;
-    private int avarage;
+    private int averaj;
     private String isim;
-    private String teknikDirektur;
-    private String golDegerleri;
-
+    private Oyuncu oyuncu;
+    private List<Lig> Ligler;
     public Takim() {
     }
 
-    public Takim(int id, int fklig, int puan, int sira, int avarage, String isim, String teknikDirektur, String golDegerleri) {
+    public Takim(Long id, int puan, int sira, int averaj, String isim) {
         this.id = id;
-        this.fklig = fklig;
         this.puan = puan;
         this.sira = sira;
-        this.avarage = avarage;
+        this.averaj = averaj;
         this.isim = isim;
-        this.teknikDirektur = teknikDirektur;
-        this.golDegerleri = golDegerleri;
+        
     }
     
     
-    
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getFklig() {
-        return fklig;
-    }
-
-    public void setFklig(int fklig) {
-        this.fklig = fklig;
-    }
 
     public int getPuan() {
         return puan;
@@ -63,12 +55,12 @@ public class Takim {
         this.sira = sira;
     }
 
-    public int getAvarage() {
-        return avarage;
+    public int getAveraj() {
+        return averaj;
     }
 
-    public void setAvarage(int avarage) {
-        this.avarage = avarage;
+    public void setAveraj(int averaj) {
+        this.averaj = averaj;
     }
 
     public String getIsim() {
@@ -79,26 +71,10 @@ public class Takim {
         this.isim = isim;
     }
 
-    public String getTeknikDirektur() {
-        return teknikDirektur;
-    }
-
-    public void setTeknikDirektur(String teknikDirektur) {
-        this.teknikDirektur = teknikDirektur;
-    }
-
-    public String getGolDegerleri() {
-        return golDegerleri;
-    }
-
-    public void setGolDegerleri(String golDegerleri) {
-        this.golDegerleri = golDegerleri;
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 67 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -114,10 +90,32 @@ public class Takim {
             return false;
         }
         final Takim other = (Takim) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
+    }
+
+  
+
+    public List<Lig> getLigler() {
+        if(this.Ligler==null)
+            this.Ligler=new ArrayList<>();
+        return Ligler;
+    }
+
+    public void setLigler(List<Lig> Ligler) {
+        this.Ligler = Ligler;
+    }
+
+    public Oyuncu getOyuncu() {
+        if(this.oyuncu==null)
+            this.oyuncu=new Oyuncu();
+        return oyuncu;
+    }
+
+    public void setOyuncu(Oyuncu oyuncu) {
+        this.oyuncu = oyuncu;
     }
     
 }

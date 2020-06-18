@@ -14,11 +14,11 @@ import javax.inject.Named;
 @SessionScoped
 public class OyuncuBean implements Serializable {
 
-    private OyuncuDao dao;
-    private Oyuncu entity;
+    private OyuncuDao oyuncudao;
+    private Oyuncu oyuncu;
 
     private int page = 1;
-    private int pageSize = 10;
+    private int pageSize = 5;
     private int pageCount;
 
     public int getPage() {
@@ -38,7 +38,7 @@ public class OyuncuBean implements Serializable {
     }
 
     public int getPageCount() {
-        this.pageCount = (int) Math.ceil(this.getDao().count() / (double) pageSize);
+        this.pageCount = (int) Math.ceil(this.getOyuncudao().count() / (double) pageSize);
         return pageCount;
     }
 
@@ -65,48 +65,52 @@ public class OyuncuBean implements Serializable {
     public OyuncuBean() {
     }
 
-    public OyuncuDao getDao() {
-        if (this.dao == null) {
-            this.dao = new OyuncuDao();
-        }
-        return dao;
-    }
+    
 
-    public void setDao(OyuncuDao dao) {
-        this.dao = dao;
-    }
-
-    public Oyuncu getEntity() {
-        if (this.entity == null) {
-            this.entity = new Oyuncu();
-        }
-        return entity;
-    }
-
-    public void setEntity(Oyuncu entity) {
-        this.entity = entity;
-    }
-
-    public String create() {
-        this.getDao().create(entity);
-        return "/oyuncu/list";
+    public void create() {
+        this.getOyuncudao().create(oyuncu);
+        this.formtemizle();
     }
 
     public List<Oyuncu> getRead() {
-        return this.getDao().read(page, pageSize);
+        return this.getOyuncudao().read(page, pageSize);
     }
 
-    public String updateForm(Oyuncu o) {
-        this.entity = o;
-        return "/oyuncu/update";
+    public void updateForm(Oyuncu o) {
+        this.oyuncu = o;
     }
 
-    public String update() {
-        this.getDao().update(entity);
-        return "/oyuncu/list";
+    public void update() {
+        this.getOyuncudao().update(oyuncu);
+        this.formtemizle();
     }
 
     public void delete(Oyuncu o) {
-        this.getDao().delete(o);
+        this.getOyuncudao().delete(o);
     }
+
+     public void formtemizle() {
+        this.oyuncu=new Oyuncu();
+    }
+    public OyuncuDao getOyuncudao() {
+        if(this.oyuncudao==null)
+            this.oyuncudao=new OyuncuDao();
+        return oyuncudao;
+    }
+
+    public void setOyuncudao(OyuncuDao oyuncudao) {
+        this.oyuncudao = oyuncudao;
+    }
+
+    public Oyuncu getOyuncu() {
+        if(this.oyuncu==null)
+            this.oyuncu=new Oyuncu();
+        return oyuncu;
+    }
+
+    public void setOyuncu(Oyuncu oyuncu) {
+        this.oyuncu = oyuncu;
+    }
+    
+    
 }
